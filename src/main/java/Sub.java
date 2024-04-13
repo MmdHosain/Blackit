@@ -29,7 +29,61 @@ public class Sub {
             j.out(acc.username + " is admin now",1);
     }
 
-    public static void showPosts(ArrayList<Post> postList){  //***********
+    public static void showPosts(ArrayList<Post> postList){
+        int pointer = 0 ;
+        if (postList.isEmpty()) {
+            j.out("nothing to show",1);
+            return;
+        }
+        while (true){
+            Post post = postList.get(pointer);
+            post.showPost();
+            ArrayList<String> options = new ArrayList<>();
+            options.add("go next");
+            options.add("go back");
+            options.add("up vote");
+            options.add("down vote");
+            options.add("add comment");
+            options.add("show comments");
+
+            options.add("Exit");
+            if(post.sub.adminList.contains(Main.user)){
+                options.add("enter \"x\" to delete");
+            }
+            int x =j.menu(options);
+            if(post.sub.adminList.contains(Main.user)){
+                post.delete();
+            }
+            switch (x){
+                case 1:
+                    pointer ++;
+                    if (pointer >= postList.size())
+                        pointer --;
+                    break;
+                case 2:
+                    pointer --;
+                    if (pointer <  0)
+                        pointer ++;
+                    break;
+                case 3:
+                    post.karma ++;
+                    break;
+                case 4:
+                    post.karma --;
+                    break;
+                case 5:
+                    post.addComment(post.sub);
+                    break;
+                case 6:
+                    post.showComments();
+                    break;
+                case 7:
+                    return;
+
+            }
+        }
+    }
+    public static void showTimeLine(ArrayList<Post> postList){
         int pointer = 0 ;
         if (postList.isEmpty()) {
             j.out("nothing to show",1);
@@ -76,49 +130,5 @@ public class Sub {
             }
         }
     }
-//    public void showPosts(ArrayList<Post> postList){
-//        int pointer = 0 ;
-//        while (true){
-//
-//
-//            Post post = postList.get(pointer);
-//            post.showPost();
-//            ArrayList<String> options = new ArrayList<>();
-//            options.add("6 go next");
-//            options.add("4 go back");
-//            options.add("5 up vote");
-//            options.add("2 down vote");
-//            options.add("3 add comment");
-//            options.add("9 show comments");
-//
-//            options.add("7 Exit");
-//            switch (j.menu(options)){
-//                case 6:
-//                    pointer ++;
-//                    if (pointer >= postList.size())
-//                        pointer --;
-//                    break;
-//                case 4:
-//                    pointer --;
-//                    if (pointer <  0)
-//                        pointer ++;
-//                    break;
-//                case 5:
-//                    post.karma ++;
-//                    break;
-//                case 2:
-//                    post.karma --;
-//                    break;
-//                case 3:
-//                    post.addComment(post.sub);
-//                    break;
-//                case 9:
-//                    post.showComments();
-//                    break;
-//                case 7:
-//                    return;
-//
-//            }
-//        }
-//    }
+
 }

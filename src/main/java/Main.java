@@ -107,6 +107,7 @@ public class Main {
                     if(searchResult1>=0) {
                         Sub sub1 = sublist.get(searchResult1);
                         ArrayList<String> options1 = new ArrayList<>();
+                        j.out(sub1.title+"   " + sub1.memberList.size() + " members " );
                         options1.add("show posts");
                         options1.add("join");
                         options1.add("Exit");
@@ -128,6 +129,7 @@ public class Main {
                     {
                         Account account = accountlist.get(searchResult2);
                         ArrayList<String> options2 = new ArrayList<>();
+                        j.out(account.username+"   " + account.accountPosts.memberList.size() + " members " );
                         options2.add("show posts");
                         options2.add("join");
                         options2.add("Exit");
@@ -218,7 +220,7 @@ public class Main {
                 }
             }
         }
-        Sub.showPosts(postList);
+        Sub.showTimeLine(postList);
 
     }
     public static void personalMenu() throws Exception {

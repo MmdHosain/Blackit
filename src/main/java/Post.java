@@ -26,6 +26,10 @@ public class Post {
             Post.showComment(commentList.get(i),this);
         }
     }
+    public void delete(){
+        text ="deleted";
+        title ="deleted";
+    }
 
     public void showPost(){
         j.out("from " + sub.title,1) ;

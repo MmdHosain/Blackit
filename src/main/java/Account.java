@@ -143,6 +143,7 @@ public class Account {
             Sub sub = joinedSubs.get(j.menu(result) - 1);
             while (true){
                 ArrayList<String> options = new ArrayList<>();
+                j.out(sub.title+"   " + sub.memberList.size() + " members " );
                 options.add("show posts");
                 options.add("leave this Sub Blackit ");
                 options.add("add post");
@@ -176,6 +177,7 @@ public class Account {
             Sub sub = ownedSubs.get(j.menu(result) - 1);
             while (true) {
                 ArrayList<String> options = new ArrayList<>();
+                j.out(sub.title+"   " + sub.memberList.size() + " members " );
                 options.add("show posts");
                 options.add("join this Sub Blackit ");
                 options.add("add post");
