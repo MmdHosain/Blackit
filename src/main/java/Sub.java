@@ -19,6 +19,13 @@ public class Sub {
         memberList.remove(user);
         user.unJoinSub(this);
     }
+    public int getKarma(){
+        int result= 0;
+        for (int i = 0; i < postList.size(); i++) {
+            result += postList.get(i).karma;
+        }
+        return result;
+    }
 
     public void addPost(Post post){
         postList.add(post);
@@ -83,6 +90,7 @@ public class Sub {
             }
         }
     }
+
     public static void showTimeLine(ArrayList<Post> postList){
         int pointer = 0 ;
         if (postList.isEmpty()) {
@@ -113,10 +121,10 @@ public class Sub {
                         pointer ++;
                     break;
                 case 3:
-                    post.karma ++;
+                    Main.user.upVote(post);
                     break;
                 case 4:
-                    post.karma --;
+                    Main.user.downVote(post);
                     break;
                 case 5:
                     post.addComment(post.sub);
@@ -126,7 +134,6 @@ public class Sub {
                     break;
                 case 7:
                     return;
-
             }
         }
     }

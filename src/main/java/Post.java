@@ -2,6 +2,9 @@ import java.util.ArrayList;
 
 public class Post {
     public ArrayList<Post> commentList = new ArrayList<>();
+    public ArrayList<Account> upVoteList = new ArrayList<>();
+    public ArrayList<Account> downVoteList = new ArrayList<>();
+
 
     Account creator;
     String title = "-";
@@ -15,6 +18,7 @@ public class Post {
         this.creator = creator;
         this.sub = subblackit;
     }
+
     public void addComment(Sub sub){
         j.out("Enter your text");
         String text = j.in();
@@ -32,8 +36,10 @@ public class Post {
     }
 
     public void showPost(){
-        j.out("from " + sub.title,1) ;
+        j.out("\n\n");
+        j.out("posted into " + sub.title,1) ;
         j.out(" by " + creator.username,1);
+        j.out("",1);
         j.out(title,1);
         j.out(text,1);
         //j.out("karma");j.out(karma,1);
@@ -41,7 +47,7 @@ public class Post {
     private static void showComment(Post comment,Post post){
         j.out("replied on " + post.title + " by " + post.creator.username,1);
         j.out(comment.text,1);
-        //j.out("karma");j.out(comment.karma,1);
+        j.out("karma");j.out(comment.karma,1);
     }
 
 }

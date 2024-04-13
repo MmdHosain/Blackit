@@ -51,7 +51,11 @@ public class j {
 //                case 5:
 //                    return cursor;
 //            }
-            return j.in(1);
+
+
+            int x = j.in(1);
+
+            return x;
         }
 
     }
@@ -60,6 +64,7 @@ public class j {
         int cursor = 1;
         while (true)
         {
+            j.out("",1);
             for (int i = 0; i < op.size(); i++) {
                 opShow(op.get(i),i+1,cursor,numerical);
             }

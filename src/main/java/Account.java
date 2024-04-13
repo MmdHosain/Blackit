@@ -9,6 +9,9 @@ public class Account {
 
     public ArrayList<Sub> ownedSubs = new ArrayList<>();
     public ArrayList<Sub> joinedSubs = new ArrayList<>();
+    public ArrayList<Post> upVotedPosts = new ArrayList<>();
+    public ArrayList<Post> downVotedPosts = new ArrayList<>();
+
     Sub accountPosts;
     String username;
     protected String password;
@@ -177,7 +180,7 @@ public class Account {
             Sub sub = ownedSubs.get(j.menu(result) - 1);
             while (true) {
                 ArrayList<String> options = new ArrayList<>();
-                j.out(sub.title+"   " + sub.memberList.size() + " members " );
+                j.out(sub.title+"   " + sub.memberList.size() + " members " + "      " + sub.getKarma() + " karma ",1);
                 options.add("show posts");
                 options.add("join this Sub Blackit ");
                 options.add("add post");
@@ -205,11 +208,9 @@ public class Account {
             }
         }
     }
-
     public void addOwnedSub(Sub sub){
         ownedSubs.add(sub);
     }
-
     public void addPost(Sub sub, ArrayList<Post> postlist){
         j.out("Enter Title",1);
         String title = j.in();
@@ -222,8 +223,31 @@ public class Account {
     public void showPosts(){
         Sub.showPosts(accountPosts.postList);
     }
-
     public static String hashWithSalt(String password) throws Exception {
         return String.valueOf(password.hashCode());
+    }
+    public void upVote(Post post){
+        if (upVotedPosts.contains(post)){
+            upVotedPosts.remove(post);
+            post.upVoteList.remove(Main.user);
+            post.karma ++;
+        }
+        else {
+            upVotedPosts.add(post);
+            post.upVoteList.add(Main.user);
+            post.karma --;
+        }
+    }
+    public void downVote(Post post){
+        if (downVotedPosts.contains(post)){
+            upVotedPosts.remove(post);
+            post.downVoteList.remove(Main.user);
+            post.karma --;
+        }
+        else {
+            downVotedPosts.add(post);
+            post.downVoteList.add(Main.user);
+            post.karma ++;
+        }
     }
 }

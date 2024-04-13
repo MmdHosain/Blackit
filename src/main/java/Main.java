@@ -19,6 +19,8 @@ public class Main {
     }
     public static void mainMenu () throws Exception {
         while(true) {
+
+            j.out("welcome to BLACKIT",1);
             ArrayList<String> options = new ArrayList<>();
             options.add("log in");
             options.add("Sign up");
@@ -49,18 +51,10 @@ public class Main {
             if(username.equals(accountlist.get(i).username) && password.equals(accountlist.get(i).password)){
                 user = accountlist.get(i);
                 accountMenu();
-//              if (studentList.get(i).isActive) {
-//                  j.out(studentList.get(i).username,1);
-//                  accountMenu();
-//                  return;
-//              }
-//              else {
-//                  j.out("account is not active");
-//                  return;
-//              }
+                break;
             }
-            else j.out("password is wrong",1);
         }
+        j.out("password is wrong",1);
     }
     public static void accountMenu() throws Exception {
         while(true){
@@ -107,7 +101,7 @@ public class Main {
                     if(searchResult1>=0) {
                         Sub sub1 = sublist.get(searchResult1);
                         ArrayList<String> options1 = new ArrayList<>();
-                        j.out(sub1.title+"   " + sub1.memberList.size() + " members " );
+                        j.out(sub1.title+"   " + sub1.memberList.size() + " members " +  "  " + sub1.getKarma() + " karma ",1);
                         options1.add("show posts");
                         options1.add("join");
                         options1.add("Exit");
@@ -129,7 +123,7 @@ public class Main {
                     {
                         Account account = accountlist.get(searchResult2);
                         ArrayList<String> options2 = new ArrayList<>();
-                        j.out(account.username+"   " + account.accountPosts.memberList.size() + " members " );
+                        j.out(account.username+"   " + account.accountPosts.memberList.size() + " members " ,1);
                         options2.add("show posts");
                         options2.add("join");
                         options2.add("Exit");
@@ -163,7 +157,7 @@ public class Main {
 
         for (int i = 0; i < sublist.size(); i++) {
             if(sublist.get(i).title.contains(searchText)){
-                result.add(sublist.get(i).title +"   "+ sublist.get(i).memberList.size() +" members");
+                result.add(sublist.get(i).title +"   "+ sublist.get(i).memberList.size() +" members" +  "  " + sublist.get(i).getKarma() + " karma ");
                 resultID.add(i);
             }
         }
@@ -315,16 +309,22 @@ public class Main {
     public static void initializer() throws Exception {
         accountlist.add(new Account("admin","0000"));
         accountlist.add(new Account("vahid","0000"));
+
         Account admin = accountlist.getFirst();
-        sublist.add(new Sub("ali",admin));
-        accountlist.getFirst().addOwnedSub(sublist.getLast());
-        sublist.add(new Sub("fun",admin));
-        accountlist.getFirst().addOwnedSub(sublist.getLast());
-        postlist.add(new Post("funny post","some joke", admin, sublist.get(0)));
+        sublist.add(new Sub("sub 1",admin));
+        admin.addOwnedSub(sublist.getLast());
+        sublist.add(new Sub("sub 2",admin));
+        admin.addOwnedSub(sublist.getLast());
+
+        postlist.add(new Post("funny post","some joke", admin, sublist.get(1)));
+        sublist.getFirst().addPost(postlist.getLast());
+        postlist.add(new Post("funny post 2","some more joke", admin, sublist.get(1)));
         sublist.getFirst().addPost(postlist.getLast());
         postlist.add(new Post("post 1 ","barbari khorim",admin, sublist.getFirst()));
         sublist.getFirst().addPost(postlist.getLast());
         postlist.add(new Post("post 2","porteghal mikhorim",admin, sublist.getFirst()));
+        sublist.getFirst().addPost(postlist.getLast());
+        postlist.add(new Post("post 2","shirini mikhorim",admin, sublist.getFirst()));
         sublist.getFirst().addPost(postlist.getLast());
 
         user = accountlist.getFirst();
