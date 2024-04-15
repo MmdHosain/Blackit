@@ -225,6 +225,7 @@ public class Main {
             options.add("admin sub blackits");
             options.add("create post");
             options.add("create sub blackit");
+            options.add("Up voted posts");
             options.add("exit");
 
             switch (j.menu(options)) {
@@ -248,6 +249,10 @@ public class Main {
                     user.addOwnedSub(sublist.getLast());
                     break;
                 case 6:
+                    j.out("upvoted posts",1);
+                    Sub.showPosts(user.upVotedPosts);
+                    break;
+                case 7:
                     return;
             }
         }

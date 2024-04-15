@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class Sub {
     public ArrayList<Account> adminList = new ArrayList<>();
@@ -54,11 +53,18 @@ public class Sub {
             options.add("show comments");
 
             options.add("Exit");
-            if(post.sub.adminList.contains(Main.user)){
-                options.add("enter \"x\" to delete");
+            int y = 0;
+
+            for (var account : post.sub.adminList) {
+                if (account.username.equals(Main.user.username)){
+                    y=1;
+                }
+            }
+            if (y==1){
+                options.add("enter \"100\" to delete");
             }
             int x =j.menu(options);
-            if(post.sub.adminList.contains(Main.user)){
+            if(y==1&&x==100){
                 post.delete();
             }
             switch (x){
@@ -73,10 +79,10 @@ public class Sub {
                         pointer ++;
                     break;
                 case 3:
-                    post.karma ++;
+                    Main.user.upVote(post);
                     break;
                 case 4:
-                    post.karma --;
+                    Main.user.downVote(post);
                     break;
                 case 5:
                     post.addComment(post.sub);
@@ -85,6 +91,63 @@ public class Sub {
                     post.showComments();
                     break;
                 case 7:
+                    return;
+
+            }
+        }
+    }
+    public static void managePosts(ArrayList<Post> postList){
+        int pointer = 0 ;
+        if (postList.isEmpty()) {
+            j.out("nothing to show",1);
+            return;
+        }
+        while (true){
+            Post post = postList.get(pointer);
+            post.showPost();
+            ArrayList<String> options = new ArrayList<>();
+            options.add("go next");
+            options.add("go back");
+            options.add("up vote");
+            options.add("down vote");
+            options.add("add comment");
+            options.add("show comments");
+            options.add("delete post");
+
+            options.add("Exit");
+
+
+            int x =j.menu(options);
+
+            post.delete();
+
+            switch (x){
+                case 1:
+                    pointer ++;
+                    if (pointer >= postList.size())
+                        pointer --;
+                    break;
+                case 2:
+                    pointer --;
+                    if (pointer <  0)
+                        pointer ++;
+                    break;
+                case 3:
+                    Main.user.upVote(post);
+                    break;
+                case 4:
+                    Main.user.downVote(post);
+                    break;
+                case 5:
+                    post.addComment(post.sub);
+                    break;
+                case 6:
+                    post.showComments();
+                    break;
+                case 7:
+                    post.delete();
+                    break;
+                case 8:
                     return;
 
             }

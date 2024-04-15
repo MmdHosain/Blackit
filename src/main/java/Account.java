@@ -188,7 +188,7 @@ public class Account {
                 options.add("Exit");
                 switch (j.menu(options)) {
                     case 1:
-                        Sub.showPosts(sub.postList);
+                        Sub.managePosts(sub.postList);
                         break;
                     case 2:
                         sub.addMember(this);
@@ -227,7 +227,7 @@ public class Account {
         return String.valueOf(password.hashCode());
     }
     public void upVote(Post post){
-        if (upVotedPosts.contains(post)){
+        if (!upVotedPosts.contains(post)){
             upVotedPosts.remove(post);
             post.upVoteList.remove(Main.user);
             post.karma ++;
@@ -239,7 +239,7 @@ public class Account {
         }
     }
     public void downVote(Post post){
-        if (downVotedPosts.contains(post)){
+        if (!downVotedPosts.contains(post)){
             upVotedPosts.remove(post);
             post.downVoteList.remove(Main.user);
             post.karma --;
